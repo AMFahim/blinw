@@ -6,6 +6,7 @@ import AuthCode from "react-auth-code-input";
 import UiButton from "../../../Components/Common/ui/UiButton";
 import { userOtpVerification } from "../../../Services/Actions/AuthAction/logInAction";
 import { verifyRegister } from "../../../Services/Actions/AuthAction/signUpAction";
+import UiLargeArrowButton from "../../../Components/Common/ui/UiLargeArrowButton";
 
 const OTPVerification = () => {
   const dispatch = useDispatch();
@@ -52,9 +53,9 @@ const OTPVerification = () => {
   };
   return (
     <AuthLayout>
-      <div className="w-full py-12">
+      <div className="w-full py-12 p-4 shadow-lg shadow-slate-300">
         <div className="pb-6 text-center">
-          <h3 className="text-5xl text-blue-light pb-8">
+          <h3 className="text-5xl text-primary-3 pb-8">
             {from === "login" ? "Login" : "Sign up"}{" "}
           </h3>
           <p>Enter SMS code below to validate your phone number</p>
@@ -64,8 +65,9 @@ const OTPVerification = () => {
             <AuthCode onChange={handleOnChange} length="6" />
           </div>
 
-          <div className="text-center my-8">
-            <UiButton label="Next"></UiButton>
+          <div className="text-center my-8 ml-5">
+            {/* <UiButton label="Next"></UiButton> */}
+            <UiLargeArrowButton label="Next"></UiLargeArrowButton>
           </div>
         </form>
       </div>

@@ -13,6 +13,7 @@ import UiButton from "../../../Components/Common/ui/UiButton";
 import CheckboxInput from "../../../Components/Common/ui/CheckboxInput";
 import UiInput from "../../../Components/Common/ui/UiInput";
 import SelectInput from "../../../Components/Common/ui/SelectInput";
+import UiLargeArrowButton from "../../../Components/Common/ui/UiLargeArrowButton";
 
 const CompanyInfo = () => {
   const { signupData } = useSelector((state) => state.SignUpInfo);
@@ -82,25 +83,22 @@ const CompanyInfo = () => {
   return (
     <AuthLayout>
       {registrationPage === false ? (
-        <div className="w-full py-12">
+        <div className="w-full py-4 shadow-lg shadow-slate-300 m-4 p-3">
           <div className="">
             <div className="pb-6 text-center">
-              <h3 className="text-5xl text-blue-light pb-8">Register</h3>
-              <p>Company details</p>
+              <h3 className="text-xl font-medium text-primary-8">Company Details</h3>
             </div>
             <form onSubmit={handleCompanyDetails}>
               <UiInput
                 label="Company Name"
                 type="text"
                 name="companyName"
-                placeholder="Add Company Name"
                 onChange={handleChange}
               ></UiInput>
               <UiInput
                 label="Commercial registration (CR) number"
                 type="text"
                 name="crNumber"
-                placeholder="Add CR Number"
                 onChange={handleChange}
               ></UiInput>
               {/* <UiInput
@@ -111,10 +109,17 @@ const CompanyInfo = () => {
                 onChange={handleChange}
               ></UiInput> */}
               <SelectInput
-                label="Company Type"
                 name="companyType"
                 onChange={handleChange}
               ></SelectInput>
+
+              <UiInput
+                label="What is your position at the company?"
+                type="text"
+                name="position"
+                onChange={handleChange}
+              ></UiInput>
+
 
               <div className="text-center flex space-x-4">
                 <CheckboxInput
@@ -126,7 +131,8 @@ const CompanyInfo = () => {
               </div>
               <div className="text-center my-8">
                 {/* <Link to="/registration"> */}
-                <UiButton label="Next"></UiButton>
+                {/* <UiButton label="Next"></UiButton> */}
+                <UiLargeArrowButton label="Next" ></UiLargeArrowButton>
                 {/* </Link> */}
               </div>
             </form>

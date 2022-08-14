@@ -3,7 +3,7 @@ import React from "react";
 const UiInput = (props) => {
   return (
     <div>
-      <label htmlFor={props.name} className="block pt-4 text-lg">
+      <label htmlFor={props.name} className="block pt-2 text-xs text-primary-label">
         {props.label}
       </label>
       <input
@@ -13,7 +13,7 @@ const UiInput = (props) => {
         onChange={props.onChange}
         defaultValue={props.value}
         disabled={props.disabled}
-        className="border-[3px] border-inputBorder w-full block my-2 rounded focus:outline-inputBorder px-3 py-3 text-lg"
+        className="border-2 border-inputBorder w-full block rounded focus:outline-inputBorder p-1 text-lg"
       />
     </div>
   );

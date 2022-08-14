@@ -49,19 +49,19 @@ const Login = () => {
           <h3 className="text-5xl text-primary-8 pb-8 text-center">
             {t("sign_in")}
           </h3>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleLogin} className="p-4">
             <UiInput
               label={t("login_email")}
               type="email"
               name="email"
-              placeholder="Enter your email address"
+              // placeholder="Enter your email address"
               onChange={handleChange}
             ></UiInput>
             <UiInput
               label={t("password")}
               type="password"
               name="password"
-              placeholder="Enter your 8 digit password"
+              // placeholder="Enter your 8 digit password"
               onChange={handleChange}
             ></UiInput>
             <div className="text-center my-8">
