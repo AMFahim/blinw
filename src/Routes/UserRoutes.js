@@ -95,7 +95,7 @@ const UserRoutes = () => {
           element={<BillingStatement/>}
         />
         <Route
-          path="/billing/payments/:purchase_id"
+          path="/billing/payments"
           element={<BillingPayments/>}
         />
         <Route

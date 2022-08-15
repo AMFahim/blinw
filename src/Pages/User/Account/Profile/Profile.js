@@ -4,9 +4,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import MainLayout from "../../../../Layout/MainLayout";
 import logo from "../../../../Assets/images/Avatar.png";
-
-import { useSelector} from 'react-redux';
-
+import { AiOutlineRight } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import sammary from "../../../../Assets/images/rightIcon.svg";
+import rightBold from "../../../../Assets/images/boldRight.svg";
 import { useTranslation } from "react-i18next";
 import UiInput from "../../../../Components/Common/ui/UiInput";
 import UiButton from "../../../../Components/Common/ui/UiButton";
@@ -19,7 +20,7 @@ const Profile = () => {
   const [updatePassword, setUpdatePassword] = useState({});
 
   // language
-  const {t, i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
   const handlePasswordUpdate = (e) => {
     const { name, value } = e.target;
     setUpdatePassword((prev) => ({
@@ -50,7 +51,7 @@ const Profile = () => {
           headers: { Authorization: `JWT ${Authtoken}` },
         })
         .then((res) => {
-            setSuccessMessage("Password changed successfully")
+          setSuccessMessage("Password changed successfully")
         })
         .catch((err) => {
           console.log('err', err)
@@ -61,87 +62,116 @@ const Profile = () => {
   //   const userInfo = JSON.parse(localStorage.getItem("user_details"));
   //   setUserDetails(userInfo);
   // }, []);
+  const profilebox = {
+    width: '434px',
+    maxHeight: '285px',
+    background: '#FFFFFF',
+    boxShadow: '0px 3px 5px rgba(9, 30, 66, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31)',
+    borderRadius: '8px'
+  }
+  const passwordbox = {
+    width: '366px',
+    maxHeight: '396px',
+    background: '#FFFFFF',
+    boxShadow: '0px 3px 5px rgba(9, 30, 66, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31)',
+    borderRadius: '8px'
+  }
+
   return (
     <MainLayout>
-     
-      <div className=" px-12 py-4">
-        <div className=" flex gap-5" >
-          <div className="mb-4 border-2 shadow-lg shadow-gray-300 h-72">
-            <div className="flex gap-8 justify-between items-center px-8 py-4 ">
-              <h3 className="text-2xl font-semibold text-gray-600">{t('details')}</h3>
-            
-              <ul>
-              <li className="text-xl  flex items-center gap-x-2 mx-auto  text-center ">
 
+      <div className="px-12 py-8 bg-color ">
+        <div className=" flex gap-5" >
+          <div style={profilebox} className="p-6">
+            <div className="flex  justify-between items-center px-4 py-3 ">
+              <h3 className="text-xl font-poppins font-bold text-[#253858]">{t('details')}</h3>
+
+              <div className="text-xl  flex items-center gap-x-2 mx-auto  text-center ">
                 <div className=" ">
-                  <img src={logo} alt="" className="w-10 h-10"/>
+                  <img src={logo} alt="" className="w-10 h-10" />
                 </div>
                 <div className="">
-                <h4 className="text-xl font-bold text-gray-400">
-                    Password Company
+                  <h4 className="font-poppins font-bold text-[#253858]">
+                    {/* {userDetails.company_name} */}
+                    PH Hero
                   </h4>
-                  <h4 className="text-sm font-bold text-gray-400">Zihadul Islam</h4>
-                 
+                  <h4 className="text-base font-poppins flex items-center gap-2 font-normal text-[#6B778C]">
+                    <img src={rightBold} alt="" className="w-4 h-4" />
+                    {/* {userDetails.name} */}
+                    Zihadul Islam
+                  </h4>
                 </div>
-              </li>
-            </ul>
-             
-            </div>
-            <div className="px-6 py-2">
-              <div className="flex justify-between py-2">
-               
-               
               </div>
-              <p className="py-2 text-lg">{t('name')}: &nbsp; {userDetails.name}</p>
-              <p className="py-2 text-lg">
-                {t('position')}: &nbsp; {userDetails.position}{" "}
-              </p>
-              <p className="py-2 text-lg">
-                {t('number')}: &nbsp; {userDetails.number}
-              </p>
-              <p className="py-2 text-lg">{t('email')}: &nbsp; {userDetails.email}</p>
+
+
+            </div>
+            <div className="  bg-primary-4 mt-3  h-auto  ">
+
+
+              <ul className="space-y-2 ">
+                <li className="text-[18px] flex  border-b-2 pb-1 px-4 text-start ">
+
+                  <p className="font-poppins font-normal text-[#172B4D] font-[14px] mr-16"> Position: </p>
+                  <p className="font-semibold font-poppins font-semibold font-[16px]  text-[#253858]">CEO</p>
+                </li>
+                <li className="text-[18px] flex  border-b-2 pb-1 px-4 text-start ">
+
+                  <p className="font-poppins font-normal text-[#172B4D] font-[14px] mr-16"> Number: </p>
+                  <p className=" font-poppins font-semibold font-[16px] text-[#253858]"> xxxxxxx </p>
+                </li>
+                <li className="text-[18px] flex  border-b-2 pb-1 px-4 text-start ">
+
+                  <p className="font-poppins font-normal text-[#172B4D] font-[14px] mr-20"> Email: </p>
+                  <p className=" font-poppins font-semibold font-[16px] text-[#253858]"> rahat@gmail.com </p>
+                </li>
+                <li className="text-[18px] flex   pb-1 px-4 text-start ">
+
+                  <p className="font-poppins font-normal text-[#172B4D] font-[14px] mr-10"> Company Admin: </p>
+                  <p className=" font-poppins font-semibold font-[16px] text-[#253858]"> Yes </p>
+                </li>
+
+              </ul>
+
             </div>
           </div>
 
-          <div className="mb-4 border-2 shadow-lg shadow-gray-300  min-h-96">
-            <div className="px-8 py-2 ">
-              <h3 className="text-2xl font-semibold text-slate-600">
-                {t('change_password')}
-              </h3>
-            </div>
-            <div className="px-6 py-2 ">
-              <form onSubmit={changePassword} >
-                <UiInput
-                  label={t('old_password')}
-                  type="password"
-                  name="old_password"
-                  placeholder={t('old_password_place')}
-                  onChange={handlePasswordUpdate}
-                ></UiInput>
-                <UiInput
-                  label={t('new_password')}
-                  type="password"
-                  name="new_password"
-                  placeholder={t('new_password_place')}
-                  onChange={handlePasswordUpdate}
-                ></UiInput>
-                {passwordSet.length < 8 && passwordSet.length > 0 ? (
-                  <p className="text-red-700">Password should be 8 character</p>
-                ) : (
-                  ""
-                )}
-                <UiInput
-                  label={t('retype_new_password')}
-                  type="password"
-                  name="retype_password"
-                  placeholder={t('retype_new_password_place')}
-                  onChange={handlePasswordUpdate}
-                ></UiInput>
-                {!successMessage ?
-                  <div className="password-verification">
+
+          <div style={passwordbox} className=" px-5 py-2  ">
+            <h3 className="font-poppins pb-3 text-xl font-medium font-[16px] font-poppins text-[#253858]">
+              {t('change_password')}
+            </h3>
+            <form onSubmit={changePassword} >
+              <UiInput
+                label={t('old_password')}
+                type="password"
+                name="old_password"
+                placeholder={t('old_password_place')}
+                onChange={handlePasswordUpdate}
+              ></UiInput>
+              <UiInput
+                label={t('new_password')}
+                type="password"
+                name="new_password"
+                placeholder={t('new_password_place')}
+                onChange={handlePasswordUpdate}
+              ></UiInput>
+              {passwordSet.length < 8 && passwordSet.length > 0 ? (
+                <p className="text-red-700">Password should be 8 character</p>
+              ) : (
+                ""
+              )}
+              <UiInput
+                label={t('retype_new_password')}
+                type="password"
+                name="retype_password"
+                placeholder={t('retype_new_password_place')}
+                onChange={handlePasswordUpdate}
+              ></UiInput>
+              {!successMessage ?
+                <div className="password-verification">
                   {confirmPasswordSet.length >= 8 &&
-                  confirmPasswordSet &&
-                  passwordSet === confirmPasswordSet ? (
+                    confirmPasswordSet &&
+                    passwordSet === confirmPasswordSet ? (
                     <p className="text-green-700">{t("password_matched")}</p>
                   ) : (
                     ""
@@ -154,17 +184,21 @@ const Profile = () => {
                 </div>
                 :
                 <p className="text-green-600">{successMessage}</p>
-                }
-                <div className="py-6 text-center">
-                  <UiButton label={t('save')} type="submit"></UiButton>
-                </div>
-              </form>
-              <div className="col-span-6"></div>
-            </div>
+              }
+
+              <div className="flex justify-end   pt-2">
+                <button className="py-2 px-8 capitalize flex bg-gray-200 justify-between item-center rounded-sm  " type="submit">
+
+                  <img src={sammary} alt="" className="w-[16px] h-[14px] mt-[5px] mr-3" />
+                  <p className="text-[#A5ADBA]">    {t("save")}{" "}</p>
+
+                </button>
+              </div>
+
+            </form>
+
           </div>
         </div>
-
-       
       </div>
     </MainLayout>
   );

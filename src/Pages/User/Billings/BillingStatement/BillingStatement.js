@@ -1,5 +1,7 @@
-import React, {  useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import sammary from "../../../../Assets/images/sammary.svg";
+import repay from "../../../../Assets/images/repay.svg";
+import short from "../../../../Assets/images/Sort.svg";
 import { BsCheck2Circle } from "react-icons/bs";
 import { FiTarget } from "react-icons/fi";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +17,25 @@ const BillingStatement = () => {
   const dispatch = useDispatch()
   const { client_details } = useSelector((state) => state.LogInfo);
   const clientDetails = client_details.client_details;
-  const {statements, summary} = useSelector((state) => state.BillingInfo);
+  const { statements, summary } = useSelector((state) => state.BillingInfo);
+  const [paginationNumber, setPaginationNumber] = useState(3);
+
+
+  // pagination
+  const [pageNumber, setPageNumber] = useState(0);
+  const usersPerPage = paginationNumber;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displaystatements = statements
+    ?.slice(pagesVisited, pagesVisited + usersPerPage)
+
+
+
+  const pageCount = Math.ceil(statements.length / usersPerPage);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+
 
   const statusStyle = {
     Repayment: "green",
@@ -27,173 +47,114 @@ const BillingStatement = () => {
 
 
   useEffect(() => {
-    dispatch(GetStatements(clientDetails.id))
-    dispatch(GetSummary(clientDetails.id))
+    // dispatch(GetStatements(clientDetails.id))
+    // dispatch(GetSummary(clientDetails.id))
   }, []);
 
   return (
     <MainLayout>
-      
-      <div className=" py-8 grid grid-cols-10 gap-6">
-        <div className="col-span-8  shadow-lg shadow-gray-300">
+
+      <div className="px-10 py-10  grid grid-cols-10">
+        <div className="col-span-7  shadow-lg shadow-gray-300 w-[658px]">
           <div className="flex justify-between px-2 items-center my-6">
-          <h3 className="text-2xl font-semibold">{t("statement")}</h3>
-        <button className="flex justify-center items-center  text-lg px-5 py-2  bg-primary-1 text-white">
-          <BsCheck2Circle className="text-white ml-5 font-semibold  mr-3" />{" "}
-          {t("repay_now")}{" "}
-        </button>
+            <h3 className="text-[16px] px-3 font-poppins font-medium text-[#253858]">{t("statement")}</h3>
+            <button className="flex justify-center items-center  text-lg px-5 py-2  bg-primary-1 ">
+              <img src={repay} alt="" className="w-6 h-6 mr-3" />{" "}
+              <p className=" font-poppins font-normal text-white"> {t("repay_now")}{" "}</p>
+            </button>
           </div>
-          <table className="w-full users-table  mx-auto ">
-            <thead >
-              <tr className=" px-4 pt-2">
-                <td>{t("description")}</td>
-                <td>{t("amount")}</td>
-                <td>
-                  <span className="mr-2">
-                    <FontAwesomeIcon icon={faArrowDown} />
-                  </span>
-                  {t("date")}
-                </td>
+          <div className="mr-3">
+            <table className="w-full users-table mx-auto">
+              <thead>
+                <tr className="font-poppins font-normal text-[#6B778C] text-[12px] px-4 pt-2">
+                  <td>{t("description")}</td>
+                  <td>{t("amount")}</td>
+                  <td className="flex justify-center items-center">
+                    {t("date")}
 
-                <td>{t("bill_status")}</td>
-              </tr>
-            </thead>
-            <tbody className='py-4'>
-             
-                  <tr >
-                    <td>Steel purchase </td>
+                    <img src={short} alt="" className="w-[14px] h-[14px]" />
+                  </td>
 
-                    <td>
-                      <p style={{ color: `${statusStyle}` }}>
-                        SAR 30,0000
-                      </p>
-                    </td>
-                    <td>12/04/2019</td>
+                  <td>{t("bill_status")}</td>
+                </tr>
+              </thead>
+              <tbody className='py-4'>
+                {displaystatements.map((statement) => {
+                  const date = new Date(statement?.created_at);
+                  const formatedDate =
+                    date.getDate() +
+                    "/" +
+                    parseInt(date.getMonth() + 1) +
+                    "/" +
+                    date.getFullYear();
 
-                    <td>
-                      <p style={{ backgroundColor: `${statusStyle}` }} className=" py-2 w-32 text-orange-600  text-center rounded-full">
-                      PENDING
-                      </p>
-                    </td>
-                  </tr>
-                  <tr >
-                    <td>Steel purchase </td>
+                  return (
+                    <tr key={statement?.id}>
+                      <td>{statement?.reason} </td>
 
-                    <td>
-                      <p style={{ color: `${statusStyle}` }}>
-                        SAR 30,0000
-                      </p>
-                    </td>
-                    <td>12/04/2019</td>
+                      <td>
 
-                    <td>
-                      <p style={{ backgroundColor: `${statusStyle}` }} className=" py-2 w-32 text-green-600  text-center rounded-full">
-                      PENDING
-                      </p>
-                    </td>
-                  </tr>
-                  <tr >
-                    <td>Steel purchase </td>
+                        <p style={{ color: `${statusStyle[statement?.reason]}` }}>
+                          SAR {statement?.amount}
+                        </p>
 
-                    <td>
-                      <p style={{ color: `${statusStyle}` }}>
-                        SAR 30,0000
-                      </p>
-                    </td>
-                    <td>12/04/2019</td>
+                      </td>
+                      <td>{formatedDate}</td>
 
-                    <td>
-                      <p style={{ backgroundColor: `${statusStyle}` }} className=" py-2 w-32 text-green-600  text-center rounded-full">
-                      PENDING
-                      </p>
-                    </td>
-                  </tr>
-                  <tr >
-                    <td>Steel purchase </td>
+                      <td>
+                        <p style={{ backgroundColor: `${statusStyle[statement?.status]}` }} className="bg-sky-400 py-2 w-32 text-white text-center rounded-full">
+                          {statement?.status}
+                        </p>
+                      </td>
 
-                    <td>
-                      <p style={{ color: `${statusStyle}` }}>
-                        SAR 30,0000
-                      </p>
-                    </td>
-                    <td>12/04/2019</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+              <div className="text-center">
+                {!statements.length < 1 && <ReactPaginate
+                  previousLabel={"prev"}
+                  nextLabel={"next"}
+                  breakLabel={"..."}
+                  breakClassName={"break-me"}
+                  pageCount={pageCount}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={changePage}
+                  containerClassName={"pagination"}
+                  subContainerClassName={"pages pagination"}
+                  activeClassName={"active"}
+                />
+                }
+              </div>
 
-                    <td>
-                      <p style={{ backgroundColor: `${statusStyle}` }} className=" py-2 w-32 text-green-600  text-center rounded-full">
-                      PENDING
-                      </p>
-                    </td>
-                  </tr>
-                  <tr >
-                    <td>Steel purchase </td>
+            </table>
+          </div>
 
-                    <td>
-                      <p style={{ color: `${statusStyle}` }}>
-                        SAR 30,0000
-                      </p>
-                    </td>
-                    <td>12/04/2019</td>
-
-                    <td>
-                      <p style={{ backgroundColor: `${statusStyle}` }} className="py-2 w-32 text-green-600 text-center rounded-full">
-                      Confirmed
-                      </p>
-                    </td>
-                  </tr>
-                  <tr >
-                    <td>Steel purchase </td>
-
-                    <td>
-                      <p style={{ color: `${statusStyle}` }}>
-                        SAR 30,0000
-                      </p>
-                    </td>
-                    <td>12/04/2019</td>
-
-                    <td>
-                      <p style={{ backgroundColor: `${statusStyle}` }} className=" py-2 w-32 text-green-600 text-center rounded-full">
-                      Confirmed
-                      </p>
-                    </td>
-                  </tr>
-               
-            </tbody>
-            <ReactPaginate
-           previousLabel={"<"}
-           nextLabel={">"}
-           breakLabel={"..."}
-           breakClassName={"break-me"}
-           pageCount={5}
-           marginPagesDisplayed={2}
-           pageRangeDisplayed={5}
-           onPageChange={8}
-           containerClassName={"pagination"}
-           subContainerClassName={"pages pagination"}
-           activeClassName={"active"}
-          />
-
-          </table>
-          
         </div>
-        <div className="col-span-2  shadow-lg shadow-gray-300  h-72  rounded">
-          <button className="flex justify-center items-center  text-lg w-full py-2 rounded bg-dark-gray text-white mr-2">
+        <div className="col-span-2  shadow-lg shadow-gray-300  h-[273px] w-[256px] rounded">
+          <button className="flex justify-start items-center  text-sm w-full py-2 px-4 rounded bg-dark-gray text-white font-poppins font-semibold mr-1">
+            {" "}
+            <img src={sammary} alt="" className="w-6 h-6 mr-3" />
             {" "}
             {t("summary")}{" "}
-            <FiTarget className="text-white ml-5 font-semibold" />{" "}
           </button>
-          <div className="h-full   py-auto">
-            <ul className="space-y-2 p-3 ">
-              <li className="text-[18px] text-center font-normal text-primary-ash-400">
-                {t("balance")}: 
-                <p className="font-semibold">SAR {summary?.balance}</p>
+          <div className="h-full   py-5">
+            <ul className="space-y-4 p-4 ">
+              <li className="text-[14px] border-b-2 pb-1 ">
+
+                <p className="font-poppins text-sm font-normal text-[#8993A4]"> {t("balance")}:</p>
+                <p className="font-semibold text-base">SAR {summary?.balance}</p>
               </li>
-              <li className="text-[18px] text-center font-normal text-primary-ash-400">
-                {t("next_repayment_date")}:
-                <p className="font-semibold"> {summary?.repayment_date} </p>
+              <li className="text-[14px] border-b-2 pb-1  ">
+
+                <p className="font-poppins font-normal text-sm text-[#8993A4]">  {t("next_repayment_date")}: </p>
+                <p className="font-semibold text-base"> 25/06/2022 </p>
               </li>
-              <li className="text-[18px] text-center font-normal text-primary-ash-400">
-                {t("next_repayment_ammount")}:
-                <p className="font-semibold">  SAR {summary?.repayment_amount}</p>
+              <li className="text-[14px]  ">
+
+                <p className="font-poppins font-normal text-sm text-[#8993A4]">   {t("next_repayment_ammount")}:</p>
+                <p className="font-semibold text-base"> SAR 500,000</p>
               </li>
             </ul>
           </div>

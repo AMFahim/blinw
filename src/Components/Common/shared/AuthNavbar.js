@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import logo from "../../../Assets/logo/logo_bildnw.svg";
+import settingIcon from "../../../Assets/images/sittingicon.svg";
 import { useTranslation } from "react-i18next";
 import { AssetImages } from "../../../Services/Constants/imagesData";
 const AuthNavbar = () => {
@@ -21,21 +22,25 @@ const AuthNavbar = () => {
     }
   };
   return (
-    <div className="navbar grid grid-cols-10 border-b-[3px] border-borderColor py-4">
+    <div className="navbar bg-primary-1 grid grid-cols-10  py-4">
       <div className="col-span-2 px-10">
-        <Link to="/">
-          <img src={AssetImages.NavbarLogo} alt="navlogo" className="w-9/12" />
-        </Link>
+      <Link to="/overview">
+        <img src={logo} alt="" className="w-9/12 " />
+      </Link>
       </div>
       <div className="col-span-8 px-10 flex justify-end">
-        <ul className="flex space-x-6">
-          <li className="text-2xl px-4 py-1 font-semibold cursor-pointer">
+        <ul className="flex items-center justify-center space-x-6">
+          <li className="text-2xl px-4 py-1 font-semibold text-white cursor-pointer">
             {language === "ar" ? (
               <span onClick={() => handleChangeLng("en")}>EN</span>
             ) : (
               <span onClick={() => handleChangeLng("ar")}> عربى </span>
             )}
           </li>
+          <li className="text-2xl px-4 py-1 font-semibold text-white cursor-pointer">
+          <img src={settingIcon} alt="" className="w-[19px] h-[19px] " />
+          </li>
+
         </ul>
       </div>
     </div>

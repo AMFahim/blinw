@@ -1,4 +1,12 @@
 export const URLS = {
-  APP_URL: "http://159.89.198.52",
-  API_URL: "http://159.89.198.52:8000/v1/",
+  APP_URL:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://bildnw-frontend.vercel.app",
+
+  FILE_URL: "https://backend.bildnw.quest",
+  API_URL: "https://backend.bildnw.quest/v1",
+  NOTIFICATIONS_URL: "wss://notification.bildnw.quest/ws/notifications/",
+  //
 };
+

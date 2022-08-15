@@ -1,7 +1,7 @@
 .users-table{
-    @apply w-full border-2;
+    @apply w-full border-b-2;
 }.users-table thead tr{
-    @apply border-b-2 bg-gray-100 p-3;
+    @apply border-b-2  p-3;
 }
 
 .users-table tr{

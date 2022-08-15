@@ -15,6 +15,7 @@ module.exports = {
       "primary-6": "#2684FF",
       "primary-7": "#FAFBFC",
       "primary-8": "#253858",
+      "primary-9": "#42526E",
       "primary-text": "#FFFFFF",
       "primary-label": "#6B778C",
       "action": {

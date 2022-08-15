@@ -1,5 +1,15 @@
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import overview from "../../Assets/images/overview.svg";
+import overviewLone from "../../Assets/images/overviewmain.svg";
+import companyinfo from "../../Assets/images/companyInfo.svg";
+import applyForCredit from "../../Assets/images/applyforcrid.svg";
+import purchase from "../../Assets/images/purchase.svg";
+import cridLine from "../../Assets/images/creditLine.svg";
+import allLone from "../../Assets/images/lone.svg";
+import payments from "../../Assets/images/payment.svg";
+import statement from "../../Assets/images/statement.svg";
+import user from "../../Assets/images/user.svg";
   const OverviewMenus = [
   ];
   const ActionCenter = [
@@ -58,7 +68,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
     {
       title: "Payments",
       active: false,
-      to: "/billing/payments/:id",
+      to: "/billing/payments",
       icon: faPenToSquare,
     },
   ];

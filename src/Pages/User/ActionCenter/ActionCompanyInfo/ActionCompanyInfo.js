@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import icon1 from '../../../../Assets/images/file_upload.png';
+import icon2 from '../../../../Assets/images/pdf_upload.png';
+import icon3 from '../../../../Assets/images/feather_upload-cloud.png';
+import icon4 from '../../../../Assets/images/feather_upload-cloud.png';
+import icon5 from '../../../../Assets/images/documentation-set.png';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +14,11 @@ import MainLayout from "../../../../Layout/MainLayout";
 import UiInput from "../../../../Components/Common/ui/UiInput";
 import CheckboxInput from "../../../../Components/Common/ui/CheckboxInput";
 import UiButton from "../../../../Components/Common/ui/UiButton";
+import SelectInput from "../../../../Components/Common/ui/SelectInput";
+import rightIcon from "../../../../Assets/images/rightArrow.svg";
+import rightIcons from "../../../../Assets/images/rightIcon.svg";
+
+
 
 const ActionCompanyInfo = () => {
   // for language implementation
@@ -27,6 +34,8 @@ const ActionCompanyInfo = () => {
   const [counter, setCounter] = useState(0);
   const [allFiles, setAllFiles] = useState({});
   const [allTextInput, setAllTextInput] = useState({});
+  const [next, setNext] = useState(1);
+  const [bar, setBar] = useState(0);
 
   const fileUpload = (event) => {
     let files = event.target.files[0];
@@ -71,359 +80,230 @@ const ActionCompanyInfo = () => {
     // API CALL
     dispatch(ClientCreate(clientDetails?.id, formData, navigate))
   };
+  const box = {
+    width: '1056px',
+    background: '#FFFFFF',
+    boxShadow: '0px 3px 5px rgba(9, 30, 66, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31)',
+    borderRadius: '8px'
+  }
+  const box1 = {
+    width: '1056px',
+    minHeight: '572px',
+    background: '#FFFFFF',
+    boxShadow: '0px 3px 5px rgba(9, 30, 66, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31)',
+    borderRadius: '8px'
+
+  }
+  const box2 = {
+    width: '384px',
+    height: '260px',
+
+    background: '#FFFFFF',
+
+    boxShadow: ' 0px 8px 12px rgba(9, 30, 66, 0.15), 0px 0px 1px rgba(9, 30, 66, 0.31)',
+    borderRadius: '8px'
+
+
+  }
   return (
     <MainLayout>
-      <div className="px-20 py-6 border-b-[3px] border-borderColor">
-        <h3 className="text-2xl font-bold">{t("provide_company_info")}</h3>
-      </div>
-      <div className="grid grid-cols-10 gap-4 px-20 py-6">
-        <div className="col-span-6">
-          <UiInput
-            disabled
-            name="company_name"
-            label={t("what_is_company_name")}
-            value={clientDetails?.client_name}
-            onChange={handleTextInput}
-          ></UiInput>
-          <UiInput
-            disabled
-            name="company_type"
-            label={t("what_is_company_type")}
-            value={clientDetails?.client_type}
-            onChange={handleTextInput}
-          ></UiInput>
-          <UiInput
-            disabled
-            name="cr_number"
-            label={t("what_is_company_cr")}
-            value={clientDetails?.cr_number}
-            onChange={handleTextInput}
-          ></UiInput>
-          <UiInput
-            disabled
-            name="rep_user_title"
-            label={t("what_is_title")}
-            type="text"
-            placeholder={t("write_answer_place")}
-            value={clientDetails?.position}
-            onChange={handleTextInput}
-          ></UiInput>
-        </div>
-        <div className="col-span-4"></div>
+      <div className="bg-color  px-10 py-10">
 
-        <div className="col-span-10">
-          <form className="" onSubmit={handleFileUpload}>
-            <div className="my-6">
-              <div className="">
-                <p className="pt-4 text-lg">{t("are_you_athorized")}</p>
-                <div className="py-2">
-                  <label htmlFor="yes" className="text-lg mr-3 pt-2">
-                    {t("yes")}
-                  </label>
-                  <input
-                    className="w-4 h-4"
-                    id="yes"
-                    value="true"
-                    name="is_rep_user_auth_signatory"
-                    type="radio"
-                    onChange={handleTextInput}
-                  // onChecked={
-                  //   retrieve_all_info?.is_rep_user_auth_signatory === true
-                  // }
-                  // checked={retrieve_all_info?.is_rep_user_auth_signatory}
-                  />
-                </div>
-                <div className="py-2">
-                  <label htmlFor="no" className="text-lg mr-3 pt-2">
-                    {t("no")}
-                  </label>
-                  <input
-                    className="w-4 h-4"
-                    id="no"
-                    value="false"
-                    name="is_rep_user_auth_signatory"
-                    type="radio"
-                    onChange={handleTextInput}
-                  // onChecked={
-                  //   retrieve_all_info?.is_rep_user_auth_signatory === false
-                  // }
-                  />
+        <div className="">
+          <div className="flex ml-6 justify-between w-1/3  relative">
+            <div className="p-2 m-2 text-center w-[200px]  ">
+              <div className="mx-auto w-2 h-2 button-bg-color rounded-full"></div>
+              <h6 className="font-[14px] text-[#5E6C84]  font-normal font-poppins">Company Information</h6>
+            </div>
+            <div className="p-2 m-2 text-center w-[200px] ">
+              <div className="mx-auto w-2 h-2 bg-gray-200 rounded-full"></div>
+              <h6 className="font-[14px] text-[#5E6C84]  font-normal font-poppins">Basic Documentation</h6>
+            </div>
+            <div className="p-2 m-2 text-center w-[200px] ">
+              <div className="mx-auto w-2 h-2 bg-gray-200 rounded-full"></div>
+              <h6 className="font-[14px] text-[#5E6C84]  font-normal font-poppins">Done</h6>
+            </div>
+            <div style={{ "width": `${bar}px` }} className={`mt-2 h-2 rounded-lg button-bg-color absolute left-[3.35rem] top-2`}></div>        </div>
+          {next == 1 &&
+            <div style={box} className=" p-[14px]">
+              <h4 className="text-[#253858] font-medium font-poppins text-lg pb-5">Please provide your company information</h4>
+              <div className="w-12/12">
+                <div className="w-1/2">
+                  <h6 className="font-[12px] text-[#6B778C] font-medium font-poppins">
+                    {t("What is your Company Name?")}</h6>
+                  <UiInput />
                 </div>
               </div>
-              <UiInput
-                name="auth_signatory_name"
-                label={t("if_not_authorized")}
-                placeholder={t("write_answer_place")}
-                onChange={(event) => handleTextInput(event)}
-              ></UiInput>
 
-              <UiInput
-                name="auth_signatory_email"
-                label={t("what_is_registered_email")}
-                type="text"
-                placeholder={t("write_answer_place")}
-                onChange={(event) => handleTextInput(event)}
-              ></UiInput>
-              <UiInput
-                name="auth_signatory_mobile_no"
-                label={t("what_is_mobile_number")}
-                type="text"
-                placeholder={t("write_answer_place")}
-                onChange={handleTextInput}
-              ></UiInput>
+              <div className=" w-12/12">
+                <div className="w-1/2 ">
+                  <h6 className="font-[12px] text-[#6B778C]  font-medium font-poppins">
 
-              {/* laste */}
-              <UiInput
-                name="last_yr_revenue"
-                label={t("what_is_company_revenue")}
-                type="text"
-                placeholder={t("write_answer_place")}
-                onChange={handleTextInput}
-              ></UiInput>
-              <UiInput
-                name="last_yr_net_income"
-                label={t("what_is_net_income")}
-                type="text"
-                placeholder={t("write_answer_place")}
-                onChange={handleTextInput}
-              ></UiInput>
-              <UiInput
-                name="other_active_credit_lines_amount"
-                label={t("have_other_active_creditline")}
-                type="text"
-                placeholder={t("write_answer_place")}
-                onChange={handleTextInput}
-              ></UiInput>
-              <UiInput
-                name="num_of_employees"
-                label={t("company_employee_number")}
-                type="text"
-                placeholder={t("write_answer_place")}
-                onChange={handleTextInput}
-              ></UiInput>
+                    {t('  What is your Company type?')}
+                  </h6>
+                  <SelectInput />
+                </div>
 
-              <UiInput
-                label={t("finding_source")}
-                type="text"
-                name="finding_source"
-                placeholder={t("how_you_find_us")}
-                onChange={handleTextInput}
-              ></UiInput>
-
-              <div className="mt-12 flex w-2/4 mx-auto items-center border-2 border-borderColor rounded-lg">
-                <span className="mr-4 px-6 py-4 text-2xl border-r-2 border-borderColor">
-                  <FontAwesomeIcon icon={faArrowDown} />
-                </span>
-                <h3 className="p-4 text-xl">
-                  {counter} / 12 {t("required_uploaded")}
-                </h3>
+              </div>
+              <div className="flex items-center my-4">
+                <input type="checkbox" />
+                <h6 className="ml-4 font-[14px] font-normal text-[#091E42] font-poppins">I HEREBY CERTIFY that the information provided in this form is complete, true and correct to the best of my knowledge.</h6>
               </div>
 
-              <UiInput
-                name="ref_article_of_association"
-                // label="Article of association"
-                label={t('association_article')}
-                type="file"
-                onChange={fileUpload}
-              // value={retrieve_all_info?.ref_article_of_association}
-              ></UiInput>
-              {retrieve_all_info?.ref_article_of_association ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={
-                    baseRoot + retrieve_all_info?.ref_article_of_association
-                  }
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_national_address"
-                label={t('national_address')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_national_address ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_national_address}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_commercial_reg"
-                label={t('commercial_registration')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_national_address ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_national_address}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_vat_reg"
-                label={t('vat_registration')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_vat_reg ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_vat_reg}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_nitaqaat_certificate"
-                label={t('nitaqaat_certificate')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_nitaqaat_certificate ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_nitaqaat_certificate}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_gosi_certificate"
-                label={t('gosi_certificate')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_gosi_certificate ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_gosi_certificate}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_investment_license"
-                label={t('foreign_company_investment_license')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_investment_license ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_investment_license}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_industrial_license"
-                label={t('manufacturer_industrial_license')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_industrial_license ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_industrial_license}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_client_profile"
-                label={t('company_profile')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_client_profile ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_client_profile}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_iban_letter"
-                label={t('iban_letter')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_iban_letter ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_iban_letter}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_1y_finance_statement"
-                label={t('1yr_audited_statement')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_1y_finance_statement ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_1y_finance_statement}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
-              <UiInput
-                name="ref_1y_bank_statement"
-                label={t('12month_bank_statement')}
-                type="file"
-                onChange={fileUpload}
-              ></UiInput>
-              {retrieve_all_info?.ref_1y_bank_statement ? (
-                <a
-                  style={{ color: "blue" }}
-                  href={baseRoot + retrieve_all_info?.ref_1y_bank_statement}
-                >
-                  {t('download')}
-                </a>
-              ) : (
-                ""
-              )}
+              <div onClick={() => { setNext(2); setBar(150) }} className="flex justify-end   pt-2">
+                <button className="py-2 px-8 capitalize font-poppins flex justify-between item-center rounded-[3px] button-bg-color text-white" onClick={() => { setNext(2); setBar(110) }} type="submit">
+                  {"next"}
+                  <img src={rightIcon} alt="" className="w-[16px] h-[14px] mt-[7px] ml-[10px]" />
+                </button>
+              </div>
             </div>
-            <CheckboxInput
-              name="correct_information"
-              label={t('hereby_information_true')}
-            ></CheckboxInput>
-            <div className="text-center py-4">
-              <UiButton label={t('submit_company_info')}></UiButton>
+          }
+          {next == 2 &&
+            <div style={box1} className=" p-[14px] ">
+              <h4 className="text-[#253858] font-[16px] font-poppins font-medium">{`Please provide required documents (0/4 uploaded)`}</h4>
+              <div className="flex flex-wrap mt-10 justify-around items-center">
+                <div className="box w-1/2 flex items-center">
+                  <img className="p-4" src={icon1} alt="boximg" />
+                  <div className="py-3">
+                    <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                    <div className="">
+                      <span className="capitalize mr-64 font-poppins ">Passport.png</span>
+                      <span className="">5.7MB</span>
+                    </div>
+                    <div className="mt-2 h-1 rounded-lg button-bg-color"></div>
+                  </div>
+                </div>
+                <div className="box w-1/2">
+                  <div className="flex items-center bg-gray-200 rounded ml-5">
+                    <img className="p-4" src={icon2} alt="boximg" />
+                    <div className="py-3">
+                      <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                      <div className="flex items-center justify-between my-2">
+                        <div className="mr-48">
+                          <span className="capitalize font-poppins">finalcial.pdf</span>
+                          <button className="f-color ml-5 font-poppins">Preview</button>
+                        </div>
+                        <span >5.7MB</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="box w-1/2 my-5">
+                  <div className="ml-5 flex items-center border-dashed border-2 rounded">
+                    <img className="p-4" src={icon3} alt="boximg" />
+                    <div className="py-3">
+                      <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                      <div className="w-12/12 flex py-2">
+                        <div className="w-7/12">
+                          <span className="text-sm font-poppins">JPG, PNG or PDF, file size no more than 10MB</span>
+                        </div>
+                        <div className="w-5/12">
+                          <button type="file" className="font-poppins font-medium text-white ml-5 button-bg-color py-1 px-4">Select file</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="box w-1/2 my-5">
+                  <div className="ml-5 flex items-center border-dashed border-2 rounded">
+                    <img className="p-4" src={icon4} alt="boximg" />
+                    <div className="py-3">
+                      <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                      <div className="w-12/12 flex py-2">
+                        <div className="w-7/12">
+                          <span className="text-sm font-poppins">JPG, PNG or PDF, file size no more than 10MB</span>
+                        </div>
+                        <div className="w-5/12">
+                          <button type="file" className="font-poppins font-medium text-white ml-5 button-bg-color py-1 px-4">Select file</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="box w-1/2 my-5">
+                  <div className="ml-5 flex items-center border-dashed border-2 rounded">
+                    <img className="p-4" src={icon4} alt="boximg" />
+                    <div className="py-3">
+                      <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                      <div className="w-12/12 flex py-2">
+                        <div className="w-7/12">
+                          <span className="text-sm font-poppins">JPG, PNG or PDF, file size no more than 10MB</span>
+                        </div>
+                        <div className="w-5/12">
+                          <button type="file" className= "font-poppins font-medium text-white ml-5 button-bg-color py-1 px-4">Select file</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="box w-1/2 my-5">
+                  <div className="ml-5 flex items-center border-dashed border-2 rounded">
+                    <img className="p-4" src={icon4} alt="boximg" />
+                    <div className="py-3">
+                      <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                      <div className="w-12/12 flex py-2">
+                        <div className="w-7/12">
+                          <span className="text-sm font-poppins">JPG, PNG or PDF, file size no more than 10MB</span>
+                        </div>
+                        <div className="w-5/12">
+                          <button type="file" className="font-poppins font-medium text-white ml-5 button-bg-color py-1 px-4">Select file</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="box w-1/2 my-5">
+                  <div className="ml-5 flex items-center border-dashed border-2 rounded">
+                    <img className="p-4" src={icon4} alt="boximg" />
+                    <div className="py-3">
+                      <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                      <div className="w-12/12 flex py-2">
+                        <div className="w-7/12">
+                          <span className="text-sm font-poppins">JPG, PNG or PDF, file size no more than 10MB</span>
+                        </div>
+                        <div className="w-5/12">
+                          <button type="file" className="text-white ml-5 button-bg-color py-1 px-4 font-poppins font-medium">Select file</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="box w-1/2 my-5">
+                  <div className="ml-5 flex items-center border-dashed border-2 rounded">
+                    <img className="p-4" src={icon4} alt="boximg" />
+                    <div className="py-3">
+                      <span className="button-bg-color p-1 text-white uppercase font-[14px] font-poppins font-bold">Document title</span>
+                      <div className="w-12/12 flex py-2">
+                        <div className="w-7/12">
+                          <span className="text-sm font-poppins">JPG, PNG or PDF, file size no more than 10MB</span>
+                        </div>
+                        <div className="w-5/12">
+                          <button type="file" className="text-white ml-5 button-bg-color py-1 px-4 font-poppins font-medium">Select file</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div onClick={() => { setNext(3); setBar(270) }} className="flex justify-end   pt-2">
+                <button className="py-2 px-8 capitalize flex bg-gray-200 justify-between item-center rounded-sm " onClick={() => { setNext(2); setBar(110) }} type="submit">
+                  
+                  <img src={rightIcons} alt="" className="w-[16px] h-[14px] mt-[5px] mr-3" />
+                  <p className="text-[#A5ADBA] font-poppins font-medium">    {t("Submit company information")}{" "}</p>
+                </button>
+              </div>
+
+
             </div>
-          </form>
+          }
+          {next == 3 &&
+            <div style={box2} className="bg-whitep-[16px] " >
+              <div className="pb-4">
+                <img className="mx-auto p-4" src={icon5} alt="boximg" />
+              </div>
+              <h4 className="px-4 text-start font-[14px] text-[#36B37E]  font-bold font-poppins">ALL SET</h4>
+            </div>}
         </div>
       </div>
     </MainLayout>

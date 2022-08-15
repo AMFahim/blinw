@@ -57,3 +57,23 @@ code {
 #signupOtp input[type=text]{
   @apply border-[3px] border-inputBorder w-14 h-14 block my-2 rounded focus:outline-inputBorder px-3 py-3 text-2xl text-center;
 }
+
+/* add custom style */
+.bg-color{
+  background: #F5F9FF;
+}
+.button-bg-color{
+  background: #00B09E;
+}
+.f-color{
+  color:#00B09E;
+}
+.f-color-2{
+  color:#5E6C84;
+}
+.f-color-3{
+  color: #6B778C;
+}
+.f-color-4{
+  color: #253858;
+}
